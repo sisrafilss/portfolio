@@ -18,10 +18,9 @@ export function Hero() {
                             <div className="w-full h-full rounded-full overflow-hidden bg-background-dark/20 dark:bg-white/5 relative">
                                 <Image
                                     alt="Professional Portrait of a Developer"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYYXIYXqs1Cn8PNCMcssxWMRo6mAbAU-Hs0bCGyPJ9YkymvKoMqFQ2m7LzrT690xTVzPoUo7pk8Ri4GHzjOA9ZbBPLquU-EMcDQ6kiHva6v99kYCXjSPyohxFMXh-l6KLmrkPcy6-3KSDPz2c4Gs6loHerKX9Mas2OZsNqrumzl6vOlWkjgdrKl_E8ONDa2Wvl2baW6cO-TdAaFNFhwZEPQmHXikM--e0g4UhHd5JOqze1DPNe-xxk4FZJMYloZMVXbxp6NJPJhGg"
+                                    src="/hero-image.jpg"
                                     fill
-                                    className="object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500"
-                                    unoptimized // External image
+                                    className="object-cover hover:scale-105 transition-all duration-500"
                                 />
                             </div>
                         </div>
@@ -69,30 +68,37 @@ export function Hero() {
 
                     {/* Action Buttons */}
                     <div className="flex flex-col @[480px]:flex-row gap-4 w-full @[480px]:w-auto px-4">
-                        <button className="flex min-w-[200px] cursor-pointer items-center justify-center rounded-full h-14 px-8 bg-primary text-background-dark text-base font-extrabold shadow-lg shadow-primary/20 active:scale-95 transition-transform hover:brightness-110">
+                        <a
+                            href="/projects"
+                            className="flex min-w-[200px] cursor-pointer items-center justify-center rounded-full h-14 px-8 bg-primary text-background-dark text-base font-extrabold shadow-lg shadow-primary/20 active:scale-95 transition-transform hover:brightness-110"
+                        >
                             <span>View My Work</span>
                             <span className="material-symbols-outlined ml-2">
                                 arrow_forward
                             </span>
-                        </button>
-                        <button className="flex min-w-[200px] cursor-pointer items-center justify-center rounded-full h-14 px-8 border-2 border-slate-300 dark:border-white/10 text-slate-900 dark:text-white text-base font-extrabold hover:bg-slate-100 dark:hover:bg-white/5 active:scale-95 transition-transform">
+                        </a>
+                        <a
+                            href="/contact"
+                            className="flex min-w-[200px] cursor-pointer items-center justify-center rounded-full h-14 px-8 border-2 border-slate-300 dark:border-white/10 text-slate-900 dark:text-white text-base font-extrabold hover:bg-slate-100 dark:hover:bg-white/5 active:scale-95 transition-transform"
+                        >
                             <span>Get In Touch</span>
-                        </button>
+                        </a>
                     </div>
 
                     {/* Social Actions Bar */}
                     <div className="pt-8 w-full">
-                        <div className="grid grid-cols-4 gap-4 max-w-sm mx-auto">
+                        <div className="flex justify-center gap-6 max-w-md mx-auto">
                             {[
-                                { name: "GitHub", icon: "hub" },
-                                { name: "LinkedIn", icon: "work" },
-                                { name: "Twitter", icon: "share" },
-                                { name: "Website", icon: "language" },
+                                { name: "GitHub", icon: "hub", url: "https://github.com/sisrafilss/" },
+                                { name: "LinkedIn", icon: "work", url: "https://www.linkedin.com/in/sisrafilss/" },
+                                { name: "Facebook", icon: "facebook", url: "https://www.facebook.com/sisrafilss/" },
                             ].map((social) => (
                                 <a
                                     key={social.name}
                                     className="flex flex-col items-center gap-2 group"
-                                    href="#"
+                                    href={social.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     <div className="rounded-full bg-slate-200 dark:bg-white/5 p-3 group-hover:text-primary group-hover:bg-primary/10 transition-colors">
                                         <span className="material-symbols-outlined">

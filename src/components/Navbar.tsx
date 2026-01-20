@@ -48,8 +48,8 @@ export function Navbar() {
                             key={link.name}
                             href={link.href}
                             className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${isActive(link.href)
-                                    ? "bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-sm"
-                                    : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
+                                ? "bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-sm"
+                                : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
                                 }`}
                         >
                             {link.name}
@@ -58,6 +58,16 @@ export function Navbar() {
                 </div>
 
                 <div className="flex items-center gap-2">
+                    {/* Resume Button - Desktop */}
+                    <a
+                        href="/resume.pdf"
+                        download="resume.pdf"
+                        className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-bold hover:opacity-90 transition-opacity whitespace-nowrap mr-2"
+                    >
+                        <span className="material-symbols-outlined text-lg">download</span>
+                        <span>Resume</span>
+                    </a>
+
                     {/* Theme Toggle */}
                     <button
                         onClick={toggleTheme}
@@ -92,14 +102,24 @@ export function Navbar() {
                             href={link.href}
                             onClick={() => setIsMobileMenuOpen(false)}
                             className={`p-4 rounded-xl font-bold flex items-center justify-between ${isActive(link.href)
-                                    ? "bg-primary/10 text-primary"
-                                    : "hover:bg-black/5 dark:hover:bg-white/5"
+                                ? "bg-primary/10 text-primary"
+                                : "hover:bg-black/5 dark:hover:bg-white/5"
                                 }`}
                         >
                             {link.name}
                             {isActive(link.href) && <span className="material-symbols-outlined">check</span>}
                         </Link>
                     ))}
+                    <a
+                        href="/resume.pdf"
+                        download="resume.pdf"
+                        className="p-4 rounded-xl font-bold flex items-center justify-between hover:bg-black/5 dark:hover:bg-white/5 text-slate-900 dark:text-white"
+                    >
+                        <span className="flex items-center gap-2">
+                            <span className="material-symbols-outlined">download</span>
+                            Resume
+                        </span>
+                    </a>
                 </div>
             )}
         </nav>

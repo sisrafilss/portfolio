@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 
 export default function RootLayout({
@@ -40,6 +41,7 @@ export default function RootLayout({
           <PageTransition>
             {children}
           </PageTransition>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
