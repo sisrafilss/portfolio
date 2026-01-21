@@ -38,7 +38,7 @@ export function Navbar() {
                             terminal
                         </span>
                     </div>
-                    <h2 className="text-xl font-extrabold tracking-tight">PH</h2>
+                    <h2 className="text-xl font-extrabold tracking-tight">Israfil Hossen</h2>
                 </Link>
 
                 {/* Desktop Navigation */}

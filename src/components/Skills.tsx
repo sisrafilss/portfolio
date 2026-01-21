@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
 
 const skillCategories = [
     {
@@ -18,23 +21,58 @@ const skillCategories = [
     },
 ];
 
+const container = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.2
+        }
+    }
+};
+
+const item = {
+    hidden: { y: 20, opacity: 0 },
+    show: { y: 0, opacity: 1 }
+};
+
 export function Skills() {
     return (
         <section className="py-20 px-4">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4"
+                    >
                         Technical Proficiency
-                    </h2>
-                    <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
+                    >
                         A comprehensive overview of the technologies and tools I master to build scalable applications.
-                    </p>
+                    </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <motion.div
+                    variants={container}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                >
                     {skillCategories.map((category) => (
-                        <div
+                        <motion.div
                             key={category.title}
+                            variants={item}
+                            whileHover={{ y: -5 }}
                             className="bg-slate-50 dark:bg-white/5 rounded-3xl p-8 border border-slate-200 dark:border-white/10 hover:border-primary/50 transition-colors group"
                         >
                             <div className="flex items-center gap-4 mb-8">
@@ -58,9 +96,9 @@ export function Skills() {
                                     </span>
                                 ))}
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
