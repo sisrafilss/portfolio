@@ -6,8 +6,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
+import ProjectGallery from './ProjectGallery';
 
 export default function ProjectDetail() {
+  const images = [
+    'https://i.ibb.co.com/9m0gF82T/Local-Guide-Dashboard.png',
+    'https://i.ibb.co.com/S7Kkd51G/Local-Guide-Home-Page.png',
+    'https://i.ibb.co.com/XZ14QYFG/Local-Guide-Tourist-Dashboard.png',
+  ];
+
   return (
     <div className="min-h-screen bg-background px-4 md:px-10 py-10">
       <div className="max-w-6xl mx-auto space-y-10">
@@ -49,23 +56,11 @@ export default function ProjectDetail() {
         <Separator />
 
         {/* 2. Screenshots */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-semibold">Screenshots</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {['Home Page', 'User Dashboard', 'Admin Panel'].map((title, i) => (
-              <Card key={i} className="rounded-2xl shadow-sm">
-                <CardHeader>
-                  <CardTitle className="text-lg">{title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="aspect-video bg-muted rounded-xl flex items-center justify-center text-muted-foreground text-sm">
-                    Screenshot Placeholder
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
+        <div className="max-w-6xl mx-auto px-4 py-20">
+          <h1 className="text-3xl font-bold mb-8">Local Guide</h1>
+
+          <ProjectGallery images={images} />
+        </div>
 
         <Separator />
 
