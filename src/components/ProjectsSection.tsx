@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface ProjectCardProps {
+  id?: string;
   title: string;
   description: string;
   tags: string[];
@@ -16,6 +17,7 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({
+  id,
   title,
   description,
   tags,
@@ -89,7 +91,7 @@ function ProjectCard({
         </div>
 
         <Link
-          href={`/projects/${detailLink}`}
+          href={`/projects/${id}`}
           className="inline-flex items-center justify-center w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 font-semibold text-sm hover:bg-slate-50 dark:hover:bg-white/5 transition-colors group/btn"
         >
           View Detail
@@ -105,6 +107,7 @@ function ProjectCard({
 export function ProjectsSection() {
   const projects = [
     {
+      id: 'local-guide',
       title: 'Local Guide',
       description:
         'A platform connecting travelers with local guides. Features comprehensive guides and real-time interactions.',
@@ -171,7 +174,7 @@ export function ProjectsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <ProjectCard key={project.title} {...project} index={index} />
+            <ProjectCard key={project.id} {...project} index={index} />
           ))}
         </div>
       </div>

@@ -1,4 +1,5 @@
-import ProjectDetail from '@/components/Projects/ProjectDetail';
+import ProjectDetailClient from '@/components/Projects/ProjectDetail';
+import { Project, projects } from '../../../../projectData';
 
 interface PageProps {
   params: {
@@ -9,11 +10,16 @@ interface PageProps {
 const ProjectDetailPage = async ({ params }: PageProps) => {
   const { id } = await params;
 
-  console.log('ID', id);
+  const project: Project | undefined = projects.find((p) => p.id === id);
+
+  if (!project) {
+    return <div>Project not found</div>;
+  }
 
   return (
     <div>
-      <ProjectDetail />
+      <ProjectDetailClient project={project} />
+      ID: {id}
     </div>
   );
 };

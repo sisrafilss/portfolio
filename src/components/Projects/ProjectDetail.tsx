@@ -6,19 +6,18 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
+import { Project } from '../../../projectData';
 import ProjectGallery from './ProjectGallery';
 
-export default function ProjectDetail() {
-  const images = [
-    'https://i.ibb.co.com/9m0gF82T/Local-Guide-Dashboard.png',
-    'https://i.ibb.co.com/S7Kkd51G/Local-Guide-Home-Page.png',
-    'https://i.ibb.co.com/XZ14QYFG/Local-Guide-Tourist-Dashboard.png',
-  ];
+interface Props {
+  project: Project;
+}
 
+export default function ProjectDetailClient({ project }: Props) {
   return (
     <div className="min-h-screen bg-background px-4 md:px-10 py-10">
       <div className="max-w-6xl mx-auto space-y-10">
-        {/* 1. Project Overview */}
+        {/* 1️⃣ Project Overview */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -26,92 +25,106 @@ export default function ProjectDetail() {
           className="space-y-4"
         >
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
-            ShopSphere – Full Stack E-Commerce Platform
+            {project.title}
           </h1>
+
           <p className="text-muted-foreground text-base md:text-lg max-w-3xl">
-            A production-ready MERN stack e-commerce application featuring
-            role-based authentication, secure payments, and an admin dashboard
-            for managing products and orders.
+            {project.shortDescription}
           </p>
 
           <div className="flex flex-wrap gap-3">
-            <Button asChild>
-              <a href="#" target="_blank">
-                <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
-              </a>
-            </Button>
-            <Button variant="outline" asChild>
-              <a href="#" target="_blank">
-                <Github className="w-4 h-4 mr-2" /> Frontend GitHub
-              </a>
-            </Button>
-            <Button variant="outline" asChild>
-              <a href="#" target="_blank">
-                <Github className="w-4 h-4 mr-2" /> Backend GitHub
-              </a>
-            </Button>
+            {project.liveLink && (
+              <Button asChild>
+                <a href={project.liveLink} target="_blank">
+                  <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
+                </a>
+              </Button>
+            )}
+
+            {project.frontendRepo && (
+              <Button variant="outline" asChild>
+                <a href={project.frontendRepo} target="_blank">
+                  <Github className="w-4 h-4 mr-2" /> Frontend GitHub
+                </a>
+              </Button>
+            )}
+
+            {project.backendRepo && (
+              <Button variant="outline" asChild>
+                <a href={project.backendRepo} target="_blank">
+                  <Github className="w-4 h-4 mr-2" /> Backend GitHub
+                </a>
+              </Button>
+            )}
           </div>
         </motion.section>
 
         <Separator />
 
-        {/* 2. Screenshots */}
-        <div className="max-w-6xl mx-auto px-4 py-20">
-          <h1 className="text-3xl font-bold mb-8">Local Guide</h1>
+        {/* 2️⃣ Screenshots */}
+        {project.images?.length > 0 && (
+          <>
+            <section className="space-y-6">
+              <h2 className="text-2xl font-semibold">Screenshots</h2>
+              <ProjectGallery images={project.images} />
+            </section>
+            <Separator />
+          </>
+        )}
 
-          <ProjectGallery images={images} />
-        </div>
-
-        <Separator />
-
-        {/* 3. Key Features */}
+        {/* 3️⃣ Key Features */}
         <section className="space-y-6">
           <h2 className="text-2xl font-semibold">Key Features</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="rounded-2xl">
-              <CardHeader>
-                <CardTitle>User Features</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm">
-                <p>• JWT Authentication & Authorization</p>
-                <p>• Add to Cart & Secure Checkout</p>
-                <p>• Order Tracking System</p>
-                <p>• Profile Management</p>
-              </CardContent>
-            </Card>
 
-            <Card className="rounded-2xl">
-              <CardHeader>
-                <CardTitle>Admin Features</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm">
-                <p>• Product CRUD Operations</p>
-                <p>• User Role Management</p>
-                <p>• Order Status Control</p>
-                <p>• Sales Analytics Dashboard</p>
-              </CardContent>
-            </Card>
+          <div className="grid md:grid-cols-2 gap-6">
+            {project.features.tourist && (
+              <Card className="rounded-2xl">
+                <CardHeader>
+                  <CardTitle>Tourist Features</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 text-sm">
+                  {project.features.tourist.map((feature, i) => (
+                    <p key={i}>• {feature}</p>
+                  ))}
+                </CardContent>
+              </Card>
+            )}
+
+            {project.features.guide && (
+              <Card className="rounded-2xl">
+                <CardHeader>
+                  <CardTitle>Guide Features</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 text-sm">
+                  {project.features.guide.map((feature, i) => (
+                    <p key={i}>• {feature}</p>
+                  ))}
+                </CardContent>
+              </Card>
+            )}
+
+            {project.features.admin && (
+              <Card className="rounded-2xl md:col-span-2">
+                <CardHeader>
+                  <CardTitle>Admin Features</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 text-sm">
+                  {project.features.admin.map((feature, i) => (
+                    <p key={i}>• {feature}</p>
+                  ))}
+                </CardContent>
+              </Card>
+            )}
           </div>
         </section>
 
         <Separator />
 
-        {/* 4. Tech Stack */}
+        {/* 4️⃣ Tech Stack */}
         <section className="space-y-6">
           <h2 className="text-2xl font-semibold">Tech Stack</h2>
           <div className="flex flex-wrap gap-3">
-            {[
-              'Next.js',
-              'React',
-              'Tailwind CSS',
-              'Node.js',
-              'Express.js',
-              'MongoDB',
-              'Mongoose',
-              'JWT',
-              'Stripe',
-              'Cloudinary',
-            ].map((tech, i) => (
+            {project.techStack.map((tech, i) => (
               <Badge key={i} variant="secondary" className="text-sm">
                 {tech}
               </Badge>
@@ -121,97 +134,79 @@ export default function ProjectDetail() {
 
         <Separator />
 
-        {/* 5. Architecture */}
+        {/* 5️⃣ Architecture */}
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold">
             Architecture & Backend Design
           </h2>
           <p className="text-muted-foreground max-w-4xl text-sm md:text-base">
-            The backend follows MVC architecture with clear separation of
-            routes, controllers, and services. Middleware is used for
-            authentication and role-based access control. JWT tokens are
-            verified globally, and admin-only routes are protected using
-            role-check middleware. The database schema is designed with
-            references for scalable product-order relationships.
+            {project.architecture}
           </p>
         </section>
 
         <Separator />
 
-        {/* 6. Challenges */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-semibold">Challenges & Solutions</h2>
-          <div className="space-y-4">
-            <Card className="rounded-2xl">
-              <CardHeader>
-                <CardTitle>Multiple API Calls in useEffect</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm">
-                Resolved repeated API calls by fixing dependency arrays and
-                memoizing functions with useCallback.
-              </CardContent>
-            </Card>
+        {/* 6️⃣ Challenges */}
+        {project.challenges?.length > 0 && (
+          <>
+            <section className="space-y-6">
+              <h2 className="text-2xl font-semibold">Challenges & Solutions</h2>
 
-            <Card className="rounded-2xl">
-              <CardHeader>
-                <CardTitle>Cart State Reset on Refresh</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm">
-                Implemented localStorage persistence and backend synchronization
-                for consistent cart state.
-              </CardContent>
-            </Card>
-          </div>
-        </section>
+              <div className="space-y-4">
+                {project.challenges.map((challenge, i) => (
+                  <Card key={i} className="rounded-2xl">
+                    <CardContent className="text-sm py-6">
+                      {challenge}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
+            <Separator />
+          </>
+        )}
 
-        <Separator />
-
-        {/* 7. Performance */}
+        {/* 7️⃣ Performance */}
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold">Performance Optimization</h2>
           <p className="text-muted-foreground text-sm md:text-base">
-            Implemented pagination for product listing, lazy loading for images,
-            debounced search queries, and MongoDB indexing on frequently queried
-            fields.
+            {project.performance}
           </p>
         </section>
 
         <Separator />
 
-        {/* 8. Security */}
+        {/* 8️⃣ Security */}
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold">Security Considerations</h2>
           <p className="text-muted-foreground text-sm md:text-base">
-            Passwords are hashed using bcrypt. JWT tokens have expiration.
-            Sensitive credentials are stored in environment variables. Input
-            validation is applied using middleware before database operations.
+            {project.security}
           </p>
         </section>
 
         <Separator />
 
-        {/* 9. Learning */}
+        {/* 9️⃣ Learning */}
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold">What I Learned</h2>
           <p className="text-muted-foreground text-sm md:text-base">
-            This project strengthened my understanding of scalable backend
-            architecture, REST API design, state management in large React apps,
-            and implementing secure authentication systems.
+            {project.learning}
           </p>
         </section>
 
         <Separator />
 
-        {/* 10. Future Improvements */}
-        <section className="space-y-4 pb-10">
-          <h2 className="text-2xl font-semibold">Future Improvements</h2>
-          <ul className="text-muted-foreground text-sm md:text-base space-y-2">
-            <li>• Add Redis caching</li>
-            <li>• Implement unit & integration testing</li>
-            <li>• Add microservice architecture</li>
-            <li>• Improve CI/CD pipeline</li>
-          </ul>
-        </section>
+        {/* 🔟 Future Improvements */}
+        {project.futureImprovements?.length > 0 && (
+          <section className="space-y-4 pb-10">
+            <h2 className="text-2xl font-semibold">Future Improvements</h2>
+            <ul className="text-muted-foreground text-sm md:text-base space-y-2">
+              {project.futureImprovements.map((item, i) => (
+                <li key={i}>• {item}</li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
     </div>
   );
