@@ -1,6 +1,6 @@
 'use client';
 
-import { ProjectsSection } from '@/components/ProjectsSection';
+import { ProjectsSection } from '@/components/Projects/ProjectsSection';
 import { motion } from 'framer-motion';
 
 export default function Projects() {
