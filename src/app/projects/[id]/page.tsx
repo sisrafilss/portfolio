@@ -19,7 +19,6 @@ const ProjectDetailPage = async ({ params }: PageProps) => {
   return (
     <div>
       <ProjectDetailClient project={project} />
-      ID: {id}
     </div>
   );
 };
